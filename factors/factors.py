@@ -1,4 +1,7 @@
 import profile
+import unittest
+import optparse
+
 
 def sum1(n):
 	""" 
@@ -31,7 +34,7 @@ def sum3(n):
 	sum = 1
 	limit = 1
 	sqrt = int(math.sqrt(n))
-	if n == sqrt*sqrt:
+	if n == sqrt*sqrt and n!=1:
 		sum+=sqrt
 		limit-=1
 	for i in range(2, int(math.sqrt(n))+limit):
@@ -39,8 +42,59 @@ def sum3(n):
 			sum+=(i+n/i)
 	return sum
 
+class FactorsTest(unittest.TestCase):
+	def test_1(self):
+		n = 1
+		self.assertEqual(1, sum1(n))
+		self.assertEqual(1, sum2(n))
+		self.assertEqual(1, sum3(n))
+
+	def test_2(self):
+		n = 2
+		self.assertEqual(1, sum1(n))
+		self.assertEqual(1, sum2(n))
+		self.assertEqual(1, sum3(n))
+
+	def test_1(self):
+		n = 3
+		self.assertEqual(1, sum1(n))
+		self.assertEqual(1, sum2(n))
+		self.assertEqual(1, sum3(n))
+
+	def test_4(self):
+		n = 4
+		self.assertEqual(3, sum1(n))
+		self.assertEqual(3, sum2(n))
+		self.assertEqual(3, sum3(n))
+
+	def test_prime_29(self):
+		n = 29
+		self.assertEqual(1, sum1(n))
+		self.assertEqual(1, sum2(n))
+		self.assertEqual(1, sum3(n))
+	
+	def test_prime_20029(self):
+		n = 20029
+		self.assertEqual(1, sum1(n))
+		self.assertEqual(1, sum2(n))
+		self.assertEqual(1, sum3(n))
+	
+	
 if __name__=='__main__':
-	n = 29629042
-	profile.run("sum1(n)")
-	profile.run("sum2(n)")
-	profile.run("sum3(n)")
+
+	parser = optparse.OptionParser('python %prog.')
+	parser.add_option('-p', dest='profiler', action='store_true', help='run profiler instead of unittests (default parameter for function call is 29629042)')
+	parser.add_option('-v', dest='v', type='int', help='set input parameter for functions called by profiler', default=29629042)
+	
+	parser.print_help()
+	(options, args) = parser.parse_args()
+	
+	if options.profiler == True or options.v!=None:
+		n = options.v
+		print(n)
+		profile.run("sum1(n)")
+		profile.run("sum2(n)")
+		profile.run("sum3(n)")
+	else: 
+		unittest.main()
+
