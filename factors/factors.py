@@ -82,7 +82,7 @@ class FactorsTest(unittest.TestCase):
 	
 if __name__=='__main__':
 
-	parser = optparse.OptionParser('python %prog.')
+	parser = optparse.OptionParser('python %prog [-p ] [-v V]')
 	parser.add_option('-p', dest='profiler', action='store_true', help='run profiler instead of unittests (default parameter for function call is 29629042)')
 	parser.add_option('-v', dest='v', type='int', help='set input parameter for functions called by profiler', default=29629042)
 	
@@ -91,7 +91,6 @@ if __name__=='__main__':
 	
 	if options.profiler == True or options.v!=None:
 		n = options.v
-		print(n)
 		profile.run("sum1(n)")
 		profile.run("sum2(n)")
 		profile.run("sum3(n)")
