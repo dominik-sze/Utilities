@@ -1,8 +1,8 @@
 import profile
 
-def find1(n):
+def sum1(n):
 	""" 
-	Returns sum of proper divisors of n (nbers less than n which divide evenly into n).
+	Returns sum of proper divisors of n (numbers less than n which divide evenly into n).
 	Running time: O(n)
 	"""
 	sum = 1
@@ -11,10 +11,10 @@ def find1(n):
 			sum+=i
 	return sum
 
-def find2(n):
+def sum2(n):
 	""" 
-	Returns sum of proper divisors of n (nbers less than n which divide evenly into n).
-	Running time: O(n) (better constant than find1(n))
+	Returns sum of proper divisors of n (numbers less than n which divide evenly into n).
+	Running time: O(n) (better constant than find1(n) [namely 1/2 vs 1])
 	"""
 	sum = 1
 	for i in range(2, int(n/2.)+1):
@@ -22,9 +22,9 @@ def find2(n):
 			sum+=i
 	return sum
 
-def find3(n):
+def sum3(n):
 	""" 
-	Returns sum of proper divisors of n (nbers less than n which divide evenly into n).
+	Returns sum of proper divisors of n (numbers less than n which divide evenly into n).
 	Running time: O(sqrt(n))
 	"""
 	import math
@@ -41,6 +41,6 @@ def find3(n):
 
 if __name__=='__main__':
 	n = 29629042
-	profile.run("find1(n)")
-	profile.run("find2(n)")
-	profile.run("find3(n)")
+	profile.run("sum1(n)")
+	profile.run("sum2(n)")
+	profile.run("sum3(n)")
