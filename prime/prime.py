@@ -41,7 +41,14 @@ class PrimesTest(unittest.TestCase):
 		except IOError as e:
 			print('I/O error ({}): {}'.format(e.errno, e.strerror))
 
-	def test_sieve(self):
+	def test_sieve1(self):
+		last = self.__primes[-1]
+		result = eratosthenes_sieve1(last+1)
+		
+		for i,v in enumerate(result):
+			self.assertEqual(self.__primes[i], v)
+
+	def test_sieve2(self):
 		last = self.__primes[-1]
 		result = eratosthenes_sieve2(last+1)
 		
